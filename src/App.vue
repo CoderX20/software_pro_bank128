@@ -15,9 +15,9 @@ export default {
   name:"app",
   components:{
   },
-  mounted(){
-    this.$router.replace('/');
-  }
+  // mounted(){
+  //   this.$router.replace('/');
+  // }
 }
 </script>
 
