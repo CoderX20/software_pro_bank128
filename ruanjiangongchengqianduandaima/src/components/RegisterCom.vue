@@ -5,23 +5,23 @@
         <h1>REGISTER</h1>
         <div class="name">
           <h4>Name</h4>
-            <input type="text" placeholder="输入姓名">
+            <input type="text" placeholder="输入姓名" v-model="userInfo.name">
         </div>
         <div class="card_number">
           <h4>CardNumber</h4>
-            <input type="text" placeholder="输入身份证号">
+            <input type="text" placeholder="输入身份证号" v-model="userInfo.card_number">
         </div>
         <div class="address">
           <h4>Address</h4>
-            <input type="text" placeholder="输入地址">
+            <input type="text" placeholder="输入地址" v-model="userInfo.address">
         </div>
         <div class="phone_number">
           <h4>PhoneNumber</h4>
-            <input type="text" placeholder="输入电话">
+            <input type="text" placeholder="输入电话" v-model="userInfo.phone_number">
         </div>
         <div class="password">
           <h4>Password</h4>
-            <input type="password" placeholder="输入密码" v-model="password_first">
+            <input type="password" placeholder="输入密码" v-model="password">
         </div>
         <div class="repassword">
           <h4>RePassword</h4>
@@ -31,7 +31,7 @@
           <h4 style="color: red;text-align: center;">{{ inputTipStr }}</h4>
         </div>
         <div class="bottom">
-          <button>注册</button>
+          <button @click="register">注册</button>
           <button @click="back">返回登录</button>
         </div>
       </div>
@@ -44,18 +44,44 @@ export default {
   name: "RegisterCom",
   data(){
     return{
-      password_first:"",
+      password:"",
       password_second:"",
-      inputTipStr:""
+      inputTipStr:"",
+      userInfo:{
+        name:"",
+        password:"",
+        card_number:"",
+        phone_number:"",
+        address:""
+        
+      }
     }
   },
   methods:{
     back(){
       this.$router.push('/login')
+    },
+    async register(){
+      if(this.check()){
+        const result =await this.$store.dispatch("getRegister",this.userInfo)
+        if(result){
+          this.$router.replace("/login")
+        }
+      }
+    },
+    check(){
+      this.userInfo.password=this.password
+      for (let userInfoKey in this.userInfo) {
+        if(this.userInfo[userInfoKey]===""){
+          alert("请将信息填写完整")
+          return false
+        }
+      }
+      return true
     }
   },
   watch:{
-    password_first(newPwd,oldPwd){
+    password(newPwd,oldPwd){
       if(newPwd!=this.password_second){
         this.inputTipStr="两次密码不同"
       }
@@ -64,7 +90,7 @@ export default {
       }
     },
     password_second(newPwd,oldPwd){
-      if(newPwd!=this.password_first){
+      if(newPwd!=this.password){
         this.inputTipStr="两次密码不同"
       }
       else{

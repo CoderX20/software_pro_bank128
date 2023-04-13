@@ -8,7 +8,7 @@
           <div class="input_part">
             <div class="account">
               <h4>Account</h4>
-              <input type="text" placeholder="输入身份证号" v-model="username">
+              <input type="text" placeholder="输入身份证号" v-model="card_number">
             </div>
             <div class="password">
               <h4>Password</h4>
@@ -31,13 +31,13 @@ export default {
   name: "LoginCom",
   data() {
     return {
-      username: "",
+      card_number: "",
       password: ""
     }
   },
   methods:{
     login(){
-      this.$store.dispatch("login_check",{username:this.username,password:this.password})
+      this.$store.dispatch("login_check",{card_number:this.card_number,password:this.password})
     }
   }
 }
@@ -115,14 +115,6 @@ export default {
         &::-webkit-input-placeholder {
           color: rgba(255, 255, 255, .5);
         }
-
-      }
-
-      .account {
-
-      }
-
-      .password {
 
       }
 

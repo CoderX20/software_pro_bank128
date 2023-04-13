@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+@CrossOrigin
 @RestController
 @RequestMapping("user")
 @Api(tags = "用户操作")
