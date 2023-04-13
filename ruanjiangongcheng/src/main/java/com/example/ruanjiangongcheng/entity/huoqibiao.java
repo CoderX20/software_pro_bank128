@@ -1,12 +1,21 @@
 package com.example.ruanjiangongcheng.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.Date;
 
+@ApiModel(value = "活期表信息类")
 public class huoqibiao {
+    @ApiModelProperty("ID")
     private Integer id;
+    @ApiModelProperty(value = "card_number")
     private String card_number;
+    @ApiModelProperty(value = "create_time")
     private Date create_time;
+    @ApiModelProperty(value = "money")
     private Double money;
+    @ApiModelProperty(value = "last_time")
     private Date last_time;
 
     public Integer getId() {

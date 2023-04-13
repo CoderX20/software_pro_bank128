@@ -1,10 +1,21 @@
 package com.example.ruanjiangongcheng.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "用户信息类")
 public class UserInfo {
+
+    @ApiModelProperty(value = "name",example = "cloud")
     private String name;
+
+    @ApiModelProperty(value = "card_number")
     private String card_number;
+    @ApiModelProperty(value = "phone_number")
     private String phone_number;
+    @ApiModelProperty(value = "password")
     private String password;
+    @ApiModelProperty(value = "address")
     private String address;
 
     public String getName() {
