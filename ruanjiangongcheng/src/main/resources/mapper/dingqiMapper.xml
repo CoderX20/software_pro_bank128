@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ruanjiangongcheng.mapper.dingqiMapper">
+    <insert id="insertNewDingqi">
+        insert into  dingqi(card_number,create_time,money,period,rate)
+        values(#{card_number},#{create_time},#{money},#{period},#{rate})
+    </insert>
+    <delete id="deleteDingqi">
+        delete from dingqi where id=#{id}
+    </delete>
+
+    <select id="selectAllDingqi" resultType="com.example.ruanjiangongcheng.entity.dingqibiao">
+        select * from dingqi where card_number=#{card_number}
+    </select>
+    <select id="selectOneByID" resultType="com.example.ruanjiangongcheng.entity.dingqibiao">
+        select * from dingqi where id=#{id}
+    </select>
+</mapper>

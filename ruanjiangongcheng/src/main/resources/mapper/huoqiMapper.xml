@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ruanjiangongcheng.mapper.huoqiMapper">
+    <insert id="insertNewHuoqi"  parameterType="map">
+        insert into huoqi(card_number,create_time,money,last_time)
+        values(#{card_number},#{create_time},#{money},#{last_time})
+    </insert>
+    <update id="updateHuoqi">
+        update huoqi set money=#{money},last_time=#{last_time} where id=#{id}
+    </update>
+    <delete id="deleteHuoqi">
+        delete from huoqi where id= #{id}
+    </delete>
+
+    <select id="selectAllByCardNumber" resultType="com.example.ruanjiangongcheng.entity.huoqibiao">
+        select * from huoqi where card_number=#{cardNumber}
+    </select>
+    <select id="selectOneByID" resultType="com.example.ruanjiangongcheng.entity.huoqibiao">
+        select * from huoqi where id=#{id}
+    </select>
+</mapper>

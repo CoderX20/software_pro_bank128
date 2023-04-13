@@ -26,28 +26,5 @@ import gx from "./gx"
 
 export default new VueRouter({
     mode:"history",
-    // routes:[
-    //
-    //     {
-    //         path:'/login',
-    //         name:"Login",
-    //         component:LoginCom
-    //     },
-    //     {
-    //         path:'/businessSelectCom',
-    //         name:"BusinessSelectCom",
-    //         component:BusinessSelectCom
-    //     },
-    //     {
-    //         path:'/register',
-    //         name:"Register",
-    //         component:RegisterCom
-    //     },
-    //     {
-    //         path:'/*',
-    //         redirect:'/businessSelectCom'
-    //     },
-    //
-    // ]
     routes:[].concat(gx,rt)
 })

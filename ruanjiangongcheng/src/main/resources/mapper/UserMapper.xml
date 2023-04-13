@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ruanjiangongcheng.mapper.UserMapper">
+    <insert id="addUser">
+        insert into account(name,card_number,phone_number,password,address)
+        values(#{name},#{card_number},#{phone_number},#{password},#{address})
+    </insert>
+
+    <select id="selectOneByCardNumber" resultType="com.example.ruanjiangongcheng.entity.UserInfo">
+        SELECT * from account where card_number=#{cardNumber}
+    </select>
+</mapper>
