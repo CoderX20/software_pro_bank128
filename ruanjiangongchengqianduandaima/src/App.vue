@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <DepositCom></DepositCom>
 <!--    <LoginCom></LoginCom>-->
 <!--    <business-select-com></business-select-com>-->
   </div>
@@ -8,12 +9,14 @@
 
 <script>
 import LoginCom from "@/components/LoginCom";
+import DepositCom from "./components/DepositCom.vue";
 import BusinessSelectCom from "@/components/BusinessSelectCom";
 export default {
   name: 'App',
   components: {
     LoginCom,
-    BusinessSelectCom
+    BusinessSelectCom,
+    DepositCom
   }
 }
 </script>

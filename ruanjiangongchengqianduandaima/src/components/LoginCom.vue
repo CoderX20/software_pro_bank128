@@ -8,17 +8,17 @@
           <div class="input_part">
             <div class="account">
               <h4>Account</h4>
-              <input type="text" placeholder="输入身份证号">
+              <input type="text" placeholder="输入身份证号" v-model="username">
             </div>
             <div class="password">
               <h4>Password</h4>
-              <input type="password" placeholder="输入密码">
+              <input type="password" placeholder="输入密码" v-model="password">
             </div>
           </div>
           <div class="bottom">
 <!--            <a href="">立即注册</a>-->
             <router-link to="/register" class="to_register">立即注册</router-link>
-            <button>登录</button>
+            <button @click="login">登录</button>
           </div>
         </div>
       </div>
@@ -35,6 +35,11 @@ export default {
       password: ""
     }
   },
+  methods:{
+    login(){
+      this.$store.dispatch("login_check",{username:this.username,password:this.password})
+    }
+  }
 }
 </script>
 
@@ -62,6 +67,7 @@ export default {
     flex: 5;
     background-image: url("../assets/image/pic_01.png");
     background-position: center;
+    background-repeat: no-repeat;
   }
 
   .right {

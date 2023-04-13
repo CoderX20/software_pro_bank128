@@ -21,15 +21,18 @@
         </div>
         <div class="password">
           <h4>Password</h4>
-            <input type="password" placeholder="输入密码">
+            <input type="password" placeholder="输入密码" v-model="password_first">
         </div>
         <div class="repassword">
           <h4>RePassword</h4>
-            <input type="password" placeholder="再次输入密码">
+            <input type="password" placeholder="再次输入密码" v-model="password_second">
+        </div>
+        <div class="password">
+          <h4 style="color: red;text-align: center;">{{ inputTipStr }}</h4>
         </div>
         <div class="bottom">
           <button>注册</button>
-          <button>返回登录</button>
+          <button @click="back">返回登录</button>
         </div>
       </div>
     </div>
@@ -38,7 +41,37 @@
 
 <script>
 export default {
-  name: "RegisterCom"
+  name: "RegisterCom",
+  data(){
+    return{
+      password_first:"",
+      password_second:"",
+      inputTipStr:""
+    }
+  },
+  methods:{
+    back(){
+      this.$router.push('/login')
+    }
+  },
+  watch:{
+    password_first(newPwd,oldPwd){
+      if(newPwd!=this.password_second){
+        this.inputTipStr="两次密码不同"
+      }
+      else{
+        this.inputTipStr=""
+      }
+    },
+    password_second(newPwd,oldPwd){
+      if(newPwd!=this.password_first){
+        this.inputTipStr="两次密码不同"
+      }
+      else{
+        this.inputTipStr=""
+      }
+    }
+  }
 }
 </script>
 
