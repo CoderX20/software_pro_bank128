@@ -5,10 +5,13 @@ import com.example.ruanjiangongcheng.mapper.dingqiMapper;
 import com.example.ruanjiangongcheng.service.IDingqiService;
 import com.example.ruanjiangongcheng.service.exception.ChuXuNullException;
 import com.example.ruanjiangongcheng.service.exception.InsertException;
+import com.example.ruanjiangongcheng.service.exception.NotYetDueException;
 import com.example.ruanjiangongcheng.service.exception.deleteException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -64,6 +67,33 @@ public class DingqiService implements IDingqiService {
 
     @Override
     public int deleteOne(int id) {
+        dingqibiao dq = dingqimapper.selectOneByID(id);
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(dq.getCreate_time());
+        String period = dq.getPeriod();
+        switch (period){
+            case "3个月":
+               rightNow.add(Calendar.MONTH,3);
+                break;
+            case "6个月":
+                rightNow.add(Calendar.MONTH,6);
+                break;
+            case "1年":
+                rightNow.add(Calendar.YEAR,1);
+                break;
+            case "3年":
+                rightNow.add(Calendar.YEAR,3);
+                break;
+            case "5年":
+                rightNow.add(Calendar.YEAR,5);
+                break;
+            default:
+                break;
+        }
+        Date resultTime = rightNow.getTime();
+        if(!new Date().after(resultTime)){
+            throw new NotYetDueException("储蓄还未到期");
+        }
         int result = dingqimapper.deleteDingqi(id);
         if(result==0){
             throw new deleteException("删除失败");

@@ -30,6 +30,8 @@ public class BaseController {
             result.setStatus(5008);//表示更新错误
         }else if (e instanceof HasMonryException){
             result.setStatus(5009);//表示账户还有余额，不能删除
+        } else if (e instanceof  NotYetDueException) {
+            result.setStatus(5010);//表示定期用户的储蓄还未到期
         }
         return result;
     }
