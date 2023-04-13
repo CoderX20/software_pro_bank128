@@ -36,8 +36,11 @@ export default {
     }
   },
   methods:{
-    login(){
-      this.$store.dispatch("login_check",{username:this.username,password:this.password})
+   async login(){
+      if(await this.$store.dispatch("login_check",{card_number:this.username,password:this.password})){
+        this.$router.push('/deposit')
+      }
+
     }
   }
 }
