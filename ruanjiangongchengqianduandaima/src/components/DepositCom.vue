@@ -2,7 +2,7 @@
     <div id="deposit-com">
         <div id="container">
             <div class="entry-row">
-                <el-table :data="personal_data" @row-click="clicked">
+                <el-table :data="personal_data" @row-click="clicked" style="font-size: 17px;">
                 <el-table-column label="ID" property="id" width="100"></el-table-column>
                 <el-table-column label="卡号" property="card_number" width="200"></el-table-column>
                 <el-table-column label="存款金额" property="money" width="200"></el-table-column>
@@ -11,8 +11,8 @@
                 </el-table>
             </div>
             <div class="entry-row">
-                <input type="button" value="选择存款" class="but" @click="select_deposit">
-                <input type="button" value="取消选择" class="but" @click="select_deposit_cancel">
+                <!-- <input type="button" value="选择存款" class="but" @click="select_deposit">
+                <input type="button" value="取消选择" class="but" @click="select_deposit_cancel"> -->
                 <input type="button" value="新增存款" class="but" @click="create_new_deposit">
             </div>
             <div class="entry-row" v-show="isNew">
@@ -34,7 +34,10 @@
                 </el-select>
             </div>
             <div class="entry-row">
-                <input type="number" class="entry" id="money-entry" v-model="money">
+                <h4 style="text-align: center;">存款余额:{{ restMoney }}</h4>
+            </div>
+            <div class="entry-row">
+                <a>输入存款金额</a><input type="number" class="entry" id="money-entry" v-model="money">
             </div>
             <div class="entry-row">
                 <h4 style="color:red;text-align: center;">{{ inputTipStr }}</h4>
@@ -109,6 +112,7 @@ export default {
             ],
             selected_row:null,
             money:0,
+            restMoney:0,
             inputTipStr:"",
         }
     },
@@ -118,6 +122,9 @@ export default {
             // console.log(event)
             // console.log(column)
             this.selected_row=row
+            this.isNew=false
+            this.isRegular=false
+            this.restMoney=Number(this.selected_row.money)
         },
         deposit_class_change(){
             if(this.deposit_class_new=="定期"){
@@ -134,7 +141,7 @@ export default {
         select_deposit(){
             this.isNew=false
             this.isRegular=false
-            this.money=Number(this.selected_row.money)
+            this.restMoney=Number(this.selected_row.money)
         },
         select_deposit_cancel(){
             // 取消选择
@@ -174,7 +181,7 @@ export default {
     },
     watch:{
         money(newValue,oldValue){
-            if(Number(newValue)<Number(oldValue)){
+            if(Number(newValue)<0){
                 this.inputTipStr="金额输入错误"
             }
             else{
@@ -215,11 +222,12 @@ export default {
     width: 950px;
     margin: 10px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 }
 .but{
     width: 150px;
     height: 30px;
+    margin: 20px;
 }
 .entry{
     width: 400px;

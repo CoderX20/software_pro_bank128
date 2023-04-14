@@ -47,3 +47,27 @@ export const getCurrent_all=(params)=>{
         params
     })
 }
+// 删除定期账户
+export const delAccount_regular=(params)=>{
+    return requests({
+        url:"/dingqi/delete",
+        method:"POST",
+        params
+    })
+}
+// 删除活期账户
+export const delAccount_current=(params)=>{
+    return requests({
+        url:"/huoqi/delete",
+        method:"POST",
+        params
+    })
+}
+// 活期取钱
+export const withdrawMoney_current=(params)=>{
+    return requests({
+        url:"/huoqi/withdrawal",
+        method:"POST",
+        params
+    })
+}

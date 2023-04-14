@@ -43,6 +43,7 @@ export default {
       }
       else if(login_res&&this.$store.state.gx.business==-1){
         // 取款
+        this.$router.push('/withdraw')
       }
     }
   }

@@ -1,5 +1,5 @@
 //编写vuex
-import {loginCheck,updateDeposit_current,subNewDeposit_current,subNewDeposit_Regular,getRegular_all,getCurrent_all} from "@/api/gx"//导入请求axios请求
+import {loginCheck,updateDeposit_current,subNewDeposit_current,subNewDeposit_Regular,getRegular_all,getCurrent_all,delAccount_current,delAccount_regular,withdrawMoney_current} from "@/api/gx"//导入请求axios请求
 const state={
     user_information:{
         // 用户信息
@@ -76,6 +76,37 @@ const actions={
         if(result.data.status==200){
             // 操作成功
             commit('add_personal_deposit_data_current',result.data.data)
+        }
+        else{
+            alert(result.data.message)
+        }
+    },
+    // 删除活期账户
+    async del_account_current({commit},params){
+        var result=await delAccount_current(params)
+        if(result.data.status==200){
+            alert("删除成功")
+        }
+        else{
+            alert(result.data.message)
+        }
+    },
+    // 删除定期账户
+    async del_account_regular({commit},params){
+        var result=await delAccount_regular(params)
+        if(result.data.status==200){
+            alert("删除成功")
+        }
+        else{
+            alert(result.data.message)
+        }
+    },
+    // 活期取钱
+    async withdraw_money_current({commit},params){
+        var result=await withdrawMoney_current(params)
+        console.log(result)
+        if(result.data.status==200){
+            alert("取款成功")
         }
         else{
             alert(result.data.message)
