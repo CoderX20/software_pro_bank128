@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <router-view></router-view>
-    <DepositCom></DepositCom>
 <!--    <LoginCom></LoginCom>-->
 <!--    <business-select-com></business-select-com>-->
   </div>
@@ -16,7 +15,6 @@ export default {
   components: {
     LoginCom,
     BusinessSelectCom,
-    DepositCom
   }
 }
 </script>
