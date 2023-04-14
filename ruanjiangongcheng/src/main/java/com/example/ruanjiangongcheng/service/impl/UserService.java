@@ -16,6 +16,7 @@ public class UserService implements IUserService {
     private UserMapper userMapper;
     @Override
     public UserInfo userLogin(UserInfo user) {
+        System.out.println(user);
         //获取到传入参数中的身份证号和密码
         String cardNumber=user.getCard_number();
         String password=user.getPassword();

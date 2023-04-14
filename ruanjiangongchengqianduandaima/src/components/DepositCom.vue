@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 export default {
     name:"depositCom",
     data(){
@@ -159,15 +160,16 @@ export default {
                 }
             }
             this.$store.state.gx.personal_deposit_data=[]
-            setTimeout(this.get_data(),5000)
+            setTimeout(this.get_data,10)
         },
         back(){
             this.$router.push('/login')
         },
-        get_data(){
-            this.$store.dispatch('get_regular_all',{card_number:this.$store.state.gx.user_information.card_number})
-            this.$store.dispatch('get_current_all',{card_number:this.$store.state.gx.user_information.card_number})
-            this.personal_data=this.$store.state.gx.personal_deposit_data
+        get_data() {
+          this.$store.dispatch('get_regular_all', {card_number: this.userInfo.card_number})
+          this.$store.dispatch('get_current_all', {card_number: this.userInfo.card_number})
+          this.personal_data=[]
+          this.personal_data = this.$store.state.gx.personal_deposit_data
         }
     },
     watch:{
@@ -180,9 +182,22 @@ export default {
             }
         }
     },
+  computed:{
+    ...mapState({
+      userInfo:(state)=>{
+        if(JSON.stringify(state.gx.user_information)==="{}"){
+          state.gx.user_information=JSON.parse(sessionStorage.getItem("userInfo"))
+        }
+        return state.gx.user_information
+      }
+    })
+  },
     mounted(){
-        this.get_data()
-    }
+
+      this.$store.state.gx.personal_deposit_data=[]
+      this.get_data()
+    },
+
 }
 </script>
 

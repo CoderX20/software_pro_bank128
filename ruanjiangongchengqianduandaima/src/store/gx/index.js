@@ -9,6 +9,7 @@ const state={
 const actions={
     async login_check({commit},params){
         var result=await loginCheck(params)
+
         // console.log(result)
         if(result.data.status==200){
             //登陆成功
@@ -71,7 +72,7 @@ const actions={
     // 获取所有活期数据
     async get_current_all({commit},params){
         var result=await getCurrent_all(params)
-        console.log(result)
+
         if(result.data.status==200){
             // 操作成功
             commit('add_personal_deposit_data_current',result.data.data)
@@ -83,6 +84,10 @@ const actions={
 }
 const mutations={
     set_user_information(state,params){
+        const data = JSON.stringify(params)
+        //将数据先保存到sessionStorage中
+        sessionStorage.setItem("userInfo",data)
+
         state.user_information=params
     },
     // 活期存款信息录入
