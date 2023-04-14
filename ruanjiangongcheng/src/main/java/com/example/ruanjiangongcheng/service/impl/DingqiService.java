@@ -57,6 +57,7 @@ public class DingqiService implements IDingqiService {
                 dq.setRate(0f);
                 break;
         }
+        dq.setCreate_time(new Date());
         int result = dingqimapper.insertNewDingqi(dq);
         if(result==0){
             throw new InsertException("定期存款失败");
