@@ -1,10 +1,11 @@
 //编写vuex
-import {loginCheck,updateDeposit_current,subNewDeposit_current,subNewDeposit_Regular,getRegular_all,getCurrent_all} from "@/api/gx"//导入请求axios请求
+import {loginCheck,updateDeposit_current,subNewDeposit_current,subNewDeposit_Regular,getRegular_all,getCurrent_all,delAccount_current,delAccount_regular,withdrawMoney_current} from "@/api/gx"//导入请求axios请求
 const state={
     user_information:{
         // 用户信息
     },
     personal_deposit_data:[],
+    business:0,
 }
 const actions={
     async login_check({commit},params){
@@ -80,17 +81,47 @@ const actions={
         else{
             alert(result.data.message)
         }
+    },
+    // 删除活期账户
+    async del_account_current({commit},params){
+        var result=await delAccount_current(params)
+        if(result.data.status==200){
+            alert("删除成功")
+        }
+        else{
+            alert(result.data.message)
+        }
+    },
+    // 删除定期账户
+    async del_account_regular({commit},params){
+        var result=await delAccount_regular(params)
+        if(result.data.status==200){
+            alert("删除成功")
+        }
+        else{
+            alert(result.data.message)
+        }
+    },
+    // 活期取钱
+    async withdraw_money_current({commit},params){
+        var result=await withdrawMoney_current(params)
+        console.log(result)
+        if(result.data.status==200){
+            alert("取款成功")
+        }
+        else{
+            alert(result.data.message)
+        }
     }
 }
 const mutations={
     set_user_information(state,params){
+        state.user_information=params
         const data = JSON.stringify(params)
         //将数据先保存到sessionStorage中
         sessionStorage.setItem("userInfo",data)
-
-        state.user_information=params
     },
-    // 活期存款信息录入
+    //活期存款信息录入
     add_personal_deposit_data_current(state,params){
         // console.log(params)
         for(var el in params){

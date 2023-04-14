@@ -37,10 +37,14 @@ export default {
   },
   methods:{
    async login(){
-      if(await this.$store.dispatch("login_check",{card_number:this.card_number,password:this.password})){
+      var login_res=await this.$store.dispatch("login_check",{card_number:this.card_number,password:this.password})
+      if(login_res&&this.$store.state.gx.business==1){
         this.$router.push('/deposit')
       }
-
+      else if(login_res&&this.$store.state.gx.business==-1){
+        // 取款
+        this.$router.push('/withdraw')
+      }
     }
   }
 }
