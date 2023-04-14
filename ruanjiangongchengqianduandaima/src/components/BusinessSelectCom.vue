@@ -15,12 +15,12 @@ export default {
   name: "BusinessSelectCom",
   methods:{
     deposit(){
-      this.$store.state.business=1
+      this.$store.state.gx.business=1
       // console.log(this.$store.state.business)
       this.$router.push('/login')
     },
     withdrawMoney(){
-      this.$store.state.business=-1
+      this.$store.state.gx.business=-1
       // console.log(this.$store.state.business)
       this.$router.push('/login')
     }

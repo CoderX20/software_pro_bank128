@@ -5,6 +5,7 @@ const state={
         // 用户信息
     },
     personal_deposit_data:[],
+    business:0,
 }
 const actions={
     async login_check({commit},params){
@@ -84,8 +85,11 @@ const actions={
 const mutations={
     set_user_information(state,params){
         state.user_information=params
+        const data = JSON.stringify(params)
+        //将数据先保存到sessionStorage中
+        sessionStorage.setItem("userInfo",data)
     },
-    // 活期存款信息录入
+    //活期存款信息录入
     add_personal_deposit_data_current(state,params){
         // console.log(params)
         for(var el in params){

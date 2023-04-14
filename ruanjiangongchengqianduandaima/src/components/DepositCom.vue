@@ -40,14 +40,15 @@
                 <h4 style="color:red;text-align: center;">{{ inputTipStr }}</h4>
             </div>
             <div class="entry-row">
-                <input type="button" value="提交" @click="sub_new_deposit">
-                <input type="button" value="返回" @click="back">
+                <input type="button" value="提交" class="but" @click="sub_new_deposit">
+                <input type="button" value="返回" class="but" @click="back">
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import {mapState} from "vuex"
 export default {
     name:"depositCom",
     data(){
@@ -159,15 +160,16 @@ export default {
                 }
             }
             this.$store.state.gx.personal_deposit_data=[]
-            setTimeout(this.get_data(),5000)
+            setTimeout(this.get_data,10)
         },
         back(){
             this.$router.push('/login')
         },
         get_data(){
-            this.$store.dispatch('get_regular_all',{card_number:this.$store.state.gx.user_information.card_number})
-            this.$store.dispatch('get_current_all',{card_number:this.$store.state.gx.user_information.card_number})
-            this.personal_data=this.$store.state.gx.personal_deposit_data
+            this.$store.dispatch('get_regular_all', {card_number: this.userInfo.card_number})
+            this.$store.dispatch('get_current_all', {card_number: this.userInfo.card_number})
+            this.personal_data=[]
+            this.personal_data = this.$store.state.gx.personal_deposit_data
         }
     },
     watch:{
@@ -181,11 +183,46 @@ export default {
         }
     },
     mounted(){
+        this.$store.state.gx.personal_deposit_data=[]
         this.get_data()
-    }
+    },
+    computed:{
+    ...mapState({
+      userInfo:(state)=>{
+        if(JSON.stringify(state.gx.user_information)==="{}"){
+          state.gx.user_information=JSON.parse(sessionStorage.getItem("userInfo"))
+        }
+        return state.gx.user_information
+      }
+    })
+  },
 }
 </script>
 
 <style lang="less" scoped>
-
+#container{
+    position: relative;
+    left: 50%;
+    margin-left: -500px;
+    display: flex;
+    width: 1000px;
+    background-color: #6495E5;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.entry-row{
+    width: 950px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+}
+.but{
+    width: 150px;
+    height: 30px;
+}
+.entry{
+    width: 400px;
+    height: 30px;
+}
 </style>
