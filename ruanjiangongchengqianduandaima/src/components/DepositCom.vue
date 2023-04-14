@@ -6,6 +6,7 @@
                 <el-table :data="personal_data"
                           @row-click="clicked"
                           max-height="340px"
+                          :row-style="clickClass"
                           style="font-size: 17px;">
 <!--                <el-table-column label="ID" property="id" width="100"></el-table-column>-->
                 <el-table-column label="卡号" property="card_number" align="center" width="100px"></el-table-column>
@@ -61,21 +62,9 @@ export default {
     data(){
         return{
             personal_data:[
-                // {
-                //     id:1,
-                //     card_number:"1233",
-                //     money:'3445',
-                //     period:"3 Year",
-                //     deposit_class:"定期"
-                // },
-                // {
-                //     id:2,
-                //     card_number:"1233",
-                //     money:'35',
-                //     period:"3 Year",
-                //     deposit_class:"定期"
-                // }
+
             ],
+          selectRowID:"-1",
             // 是否为新增的业务
             isNew:false,
             // 是否为定期
@@ -123,13 +112,26 @@ export default {
     methods:{
         clicked(row,event,column){
             // console.log(row)
-            // console.log(event)
+            // console.log(event ,"event")
             // console.log(column)
+          this.personal_data.map((item,index)=>{
+            if(JSON.stringify(item)===JSON.stringify(row)){
+              this.selectRowID=index
+            }
+          })
+          // console.log(this.selectRowID)
             this.selected_row=row
             this.isNew=false
             this.isRegular=false
             this.restMoney=Number(this.selected_row.money)
         },
+      clickClass({row,rowIndex}){
+        if(rowIndex===this.selectRowID){
+
+          return {"background-color": "#dcdcdc"}
+        }
+
+      },
         deposit_class_change(){
             if(this.deposit_class_new=="定期"){
                 this.isRegular=true
@@ -174,7 +176,7 @@ export default {
             setTimeout(this.get_data,10)
         },
         back(){
-            this.$router.push('/login')
+            this.$router.push('/businessSelectCom')
         },
         get_data(){
             this.$store.dispatch('get_regular_all', {card_number: this.userInfo.card_number})
@@ -193,7 +195,7 @@ export default {
             }
         }
     },
-  computed:{
+    computed:{
     ...mapState({
       userInfo:(state)=>{
         if(JSON.stringify(state.gx.user_information)==="{}"){
@@ -225,9 +227,7 @@ export default {
 }
 #container{
   padding-top: 20px;
-
     width: 1000px;
-
   border-radius: 20px;
 
   h1{
@@ -265,6 +265,9 @@ export default {
   flex: none;
   width: 70%;
   border-radius: 15px;
+}
+.selectStyle{
+  background-color: #ac2c2c;
 }
 </style>
 

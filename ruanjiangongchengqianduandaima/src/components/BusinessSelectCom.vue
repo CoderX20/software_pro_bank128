@@ -17,14 +17,24 @@ export default {
   name: "BusinessSelectCom",
   methods:{
     deposit(){
-      this.$store.state.business=1
+      this.$store.state.gx.business=1
       // console.log(this.$store.state.business)
-      this.$router.push('/login')
+      if(sessionStorage.getItem("userInfo")!==null){
+        this.$router.push("/deposit")
+      }else{
+        this.$router.push('/login')
+      }
+
     },
     withdrawMoney(){
       this.$store.state.gx.business=-1
+      if(sessionStorage.getItem("userInfo")!==null){
+        this.$router.push("/withdraw")
+      }else{
+        this.$router.push('/login')
+      }
       // console.log(this.$store.state.business)
-      this.$router.push('/login')
+
     }
   }
 }

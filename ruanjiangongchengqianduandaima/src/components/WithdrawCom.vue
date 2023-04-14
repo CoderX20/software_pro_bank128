@@ -3,7 +3,9 @@
         <div id="container">
           <h1>取款</h1>
             <div class="entry-row">
-                <el-table :data="personal_data" max-height="340px" @row-click="clicked" style="font-size: 17px;">
+                <el-table :data="personal_data" max-height="340px"
+                          :row-style="clickStyle"
+                          @row-click="clicked" style="font-size: 17px;">
 <!--                    <el-table-column label="ID" property="id" width="100"></el-table-column>-->
                     <el-table-column label="卡号" property="card_number"  align="center" width="100px"></el-table-column>
                     <el-table-column label="存款金额" property="money"  align="center" width="150px"></el-table-column>
@@ -43,13 +45,30 @@ export default {
             withdrawMoney: 0,
             inputTipStr: "",
             selected_row: null,
+            selectRowID:"-1"
         }
     },
     methods: {
+      clickStyle({row,rowIndex}){
+        if(this.selectRowID===rowIndex){
+          return {"background-color": "#dcdcdc"}
+        }
+      },
         clicked(row, event, column) {
+          this.personal_data.map((item,index)=>{
+            if(JSON.stringify(item)===JSON.stringify(row)){
+              this.selectRowID=index
+            }
+          })
             // 点击事件
             this.restMoney = Number(row.money)
             this.selected_row = row
+          if (Number(row.money) < this.withdrawMoney) {
+            this.inputTipStr = "输入金额错误"
+          }
+          else {
+            this.inputTipStr = ""
+          }
         },
         del_account() {
             if (this.selected_row == null) {
@@ -93,7 +112,7 @@ export default {
             this.withdrawMoney=0;
         },
         back(){
-            this.$router.push('/')
+            this.$router.push('/businessSelectCom')
         }
     },
     watch: {
