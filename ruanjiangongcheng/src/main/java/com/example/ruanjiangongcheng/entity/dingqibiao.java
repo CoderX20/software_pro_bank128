@@ -2,11 +2,12 @@ package com.example.ruanjiangongcheng.entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @ApiModel(value = "定期表信息类")
-
 public class dingqibiao {
     @ApiModelProperty("ID")
     private Integer id;

@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
 public class UserService implements IUserService {
     @Autowired(required = false)
     private UserMapper userMapper;
+
+    //登录
     @Override
     public UserInfo userLogin(UserInfo user) {
-        System.out.println(user);
         //获取到传入参数中的身份证号和密码
         String cardNumber=user.getCard_number();
         String password=user.getPassword();
@@ -35,6 +36,7 @@ public class UserService implements IUserService {
         return userInfo;
     }
 
+    //注册
     @Override
     public void userRegister(UserInfo user) {
         //先判断传入和数据在数据库中是否已经存在

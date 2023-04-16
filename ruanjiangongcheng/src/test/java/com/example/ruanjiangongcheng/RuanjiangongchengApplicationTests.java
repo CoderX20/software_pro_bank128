@@ -1,5 +1,6 @@
 package com.example.ruanjiangongcheng;
 
+import com.example.ruanjiangongcheng.entity.dingqibiao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ class RuanjiangongchengApplicationTests {
     @Autowired
     private DataSource dataSource;
 
+
     @Test
     void contextLoads() throws SQLException {
         System.out.println(dataSource.getConnection());
@@ -27,9 +29,10 @@ class RuanjiangongchengApplicationTests {
 //        rightNow.add(Calendar.YEAR,1);
 //        Date result = rightNow.getTime();
 //        System.out.println(result);
-        Date time=new Date();
-        Date time1=new Date();
-        System.out.println(time.equals(time1));
+//        Date time=new Date();
+//        Date time1=new Date();
+//        System.out.println(time.equals(time1));
+//        dingqibiao test1=new dingqibiao();
     }
 
 }

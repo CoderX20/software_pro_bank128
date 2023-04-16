@@ -1,7 +1,7 @@
 <template>
     <div id="deposit-com">
         <div id="container">
-          <h1>账户</h1>
+          <h1>存款</h1>
             <div class="entry-row">
                 <el-table :data="personal_data"
                           @row-click="clicked"
