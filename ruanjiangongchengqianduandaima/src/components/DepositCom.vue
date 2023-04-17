@@ -1,7 +1,7 @@
 <template>
     <div id="deposit-com">
         <div id="container">
-          <h1>账户</h1>
+          <h1>存款</h1>
             <div class="entry-row">
                 <el-table :data="personal_data"
                           @row-click="clicked"
@@ -155,6 +155,9 @@ export default {
             this.selected_row=null
         },
         sub_new_deposit(){
+            if(this.inputTipStr!=""){
+                return
+            }
             // 提交新的存款
             if(this.isNew==false){
                 // 提交旧信息
@@ -173,6 +176,8 @@ export default {
                 }
             }
             this.$store.state.gx.personal_deposit_data=[]
+            this.isNew=false
+            this.isRegular=false
             setTimeout(this.get_data,10)
         },
         back(){

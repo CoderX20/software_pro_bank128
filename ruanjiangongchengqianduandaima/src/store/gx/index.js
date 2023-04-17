@@ -96,7 +96,7 @@ const actions={
     async del_account_regular({commit},params){
         var result=await delAccount_regular(params)
         if(result.data.status==200){
-            alert("删除成功")
+            alert("删除成功")           
         }
         else{
             alert(result.data.message)
@@ -105,9 +105,10 @@ const actions={
     // 活期取钱
     async withdraw_money_current({commit},params){
         var result=await withdrawMoney_current(params)
-        console.log(result)
+        // console.log(result)
         if(result.data.status==200){
             alert("取款成功")
+            console.log(result.data)
         }
         else{
             alert(result.data.message)
