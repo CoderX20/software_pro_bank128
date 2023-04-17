@@ -1,7 +1,6 @@
-package com.example.ruanjiangongcheng;
+package com.example.ruanjiangongcheng.utils;
 
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 public class test {
