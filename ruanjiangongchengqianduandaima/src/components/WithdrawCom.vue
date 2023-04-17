@@ -94,6 +94,9 @@ export default {
             this.personal_data = this.$store.state.gx.personal_deposit_data
         },
         withdraw_money(){
+            if(this.inputTipStr!=""){
+                return
+            }
             if(this.selected_row==null){
                 alert("未选择存款")
                 return
