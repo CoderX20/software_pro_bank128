@@ -1,6 +1,7 @@
 package com.example.ruanjiangongcheng.controller;
 
 import com.example.ruanjiangongcheng.entity.dingqibiao;
+import com.example.ruanjiangongcheng.entity.retuen.dingqi;
 import com.example.ruanjiangongcheng.service.IDingqiService;
 import com.example.ruanjiangongcheng.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -22,15 +23,15 @@ public class DingqiController extends BaseController{
     @GetMapping("getAll")
     @ApiOperation("获取到账户下所有的定期")
 
-    public JsonResult<List<dingqibiao>> getAll(String card_number){
-        List<dingqibiao> lst_dingqi = dingqiService.getAll(card_number);
+    public JsonResult<List<dingqi>> getAll(String card_number){
+        List<dingqi> lst_dingqi = dingqiService.getAll(card_number);
         return new JsonResult<>(Ok,lst_dingqi);
     }
     @GetMapping("getOne")
     @ApiOperation("获取到账户下某一个定期")
 
-    public JsonResult<dingqibiao> getOne(int id){
-        dingqibiao dq = dingqiService.getOne(id);
+    public JsonResult<dingqi> getOne(int id){
+        dingqi dq = dingqiService.getOne(id);
         return new JsonResult<>(Ok,dq);
     }
     @PostMapping("create")

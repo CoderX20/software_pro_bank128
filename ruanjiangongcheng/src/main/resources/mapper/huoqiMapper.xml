@@ -20,4 +20,7 @@
     <select id="selectOneByID" resultType="com.example.ruanjiangongcheng.entity.huoqibiao">
         select * from huoqi where id=#{id}
     </select>
+    <select id="selectOneHuoqiById" resultType="com.example.ruanjiangongcheng.entity.huoqibiao">
+        select * from huoqi where id=#{id}
+    </select>
 </mapper>

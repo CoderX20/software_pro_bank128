@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ruanjiangongcheng.mapper.rateMapper">
+    <update id="updateRate">
+        update rate set rate=#{rate} where type=#{type}
+    </update>
+
+
+    <select id="selectRateByType" resultType="java.lang.Double">
+        select rate from rate where type=#{type}
+    </select>
+    <select id="selectAllRate" resultType="com.example.ruanjiangongcheng.entity.rate">
+        select * from rate
+    </select>
+</mapper>

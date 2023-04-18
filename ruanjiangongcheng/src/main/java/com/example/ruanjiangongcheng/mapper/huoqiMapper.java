@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface huoqiMapper {
     List<huoqibiao> selectAllByCardNumber(String cardNumber);
+    huoqibiao selectOneHuoqiById(Integer id);
     int insertNewHuoqi(Map params);
     huoqibiao selectOneByID(int id);
     int updateHuoqi(huoqibiao hq);

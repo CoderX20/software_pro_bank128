@@ -1,21 +1,23 @@
 package com.example.ruanjiangongcheng.service.impl;
 
 import com.example.ruanjiangongcheng.entity.huoqibiao;
+import com.example.ruanjiangongcheng.entity.retuen.huoqi;
 import com.example.ruanjiangongcheng.mapper.huoqiMapper;
+import com.example.ruanjiangongcheng.mapper.rateMapper;
 import com.example.ruanjiangongcheng.service.IHuoqiService;
 import com.example.ruanjiangongcheng.service.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.util.*;
 
 @Service
 public class HuoqiService implements IHuoqiService {
     @Autowired(required = false)
     private huoqiMapper huoqimapper;
+    @Autowired(required = false)
+    private rateMapper rt;
 
     //存款
     @Override
@@ -88,13 +90,26 @@ public class HuoqiService implements IHuoqiService {
 
     //根据身份证号获取到该账户下所有的活期信息
     @Override
-    public List<huoqibiao> getAllHuoqi(String card_number) {
+    public List<huoqi> getAllHuoqi(String card_number) {
         //在数据库中找到该账户下的所有活期信息
         List<huoqibiao> lst_huoqi = huoqimapper.selectAllByCardNumber(card_number);
         //如果没有活期信息，就提示  该账户下没有活期储蓄
         if(lst_huoqi.size()==0){
             throw new ChuXuNullException("该账户当前没有活期储蓄");
         }
-        return lst_huoqi;
+        Double r=rt.selectRateByType("活期");
+        List<huoqi> lst_hq=new ArrayList<>();
+        for (huoqibiao hq:lst_huoqi ) {
+            huoqi hqq=new huoqi(hq.getId(),hq.getCard_number(),hq.getCreate_time(),hq.getMoney(),hq.getLast_time(),r);
+            lst_hq.add(hqq);
+        }
+        return lst_hq;
+    }
+
+    @Override
+    public huoqi getOneHuoqi(Integer id) {
+        huoqibiao hq=huoqimapper.selectOneByID(id);
+        Double r = rt.selectRateByType("活期");
+        return new huoqi(hq.getId(),hq.getCard_number(),hq.getCreate_time(),hq.getMoney(),hq.getLast_time(),r);
     }
 }

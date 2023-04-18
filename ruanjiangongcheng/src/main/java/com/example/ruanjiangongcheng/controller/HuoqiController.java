@@ -1,6 +1,7 @@
 package com.example.ruanjiangongcheng.controller;
 
 import com.example.ruanjiangongcheng.entity.huoqibiao;
+import com.example.ruanjiangongcheng.entity.retuen.huoqi;
 import com.example.ruanjiangongcheng.service.IHuoqiService;
 import com.example.ruanjiangongcheng.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -20,9 +21,17 @@ public class HuoqiController extends BaseController{
 
     @GetMapping("getAll")
     @ApiOperation("获取到账户下所有的活期")
-    public JsonResult<List<huoqibiao>> getAllHuoqi(String card_number){
-        List<huoqibiao> lst_huoqi = huoqiService.getAllHuoqi(card_number);
+    public JsonResult<List<huoqi>> getAllHuoqi(String card_number){
+        List<huoqi> lst_huoqi = huoqiService.getAllHuoqi(card_number);
         return new JsonResult<>(Ok,lst_huoqi);
+
+    }
+
+    @GetMapping("getOne")
+    @ApiOperation("获取到账户下某一个活期")
+    public JsonResult<huoqi> getOneHuoqi(Integer id){
+        huoqi hq = huoqiService.getOneHuoqi(id);
+        return new JsonResult<>(Ok,hq);
 
     }
     @PostMapping("deposit")

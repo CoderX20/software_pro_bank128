@@ -1,12 +1,13 @@
-package com.example.ruanjiangongcheng.entity;
+package com.example.ruanjiangongcheng.entity.retuen;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @ApiModel(value = "活期表信息类")
-public class huoqibiao {
+public class huoqi {
     @ApiModelProperty("ID")
     private Integer id;
     @ApiModelProperty(value = "card_number")
@@ -20,16 +21,16 @@ public class huoqibiao {
 
     @ApiModelProperty(value = "last_time")
     private Date last_time;
-//    @ApiModelProperty(value = "rate")
-//    private Float rate;
+    @ApiModelProperty(value = "rate")
+    private Double rate;
 
-//    public Float getRate() {
-//        return rate;
-//    }
-//
-//    public void setRate(Float rate) {
-//        this.rate = rate;
-//    }
+    public Double getRate() {
+        return rate;
+    }
+
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
 
     public Integer getId() {
         return id;
@@ -68,17 +69,14 @@ public class huoqibiao {
         return last_time;
     }
 
-//    @Override
-//    public String toString() {
-//        return "huoqibiao{" +
-//                "id=" + id +
-//                ", card_number='" + card_number + '\'' +
-//                ", create_time=" + create_time +
-//                ", money=" + money +
-//                ", last_time=" + last_time +
-//                ", rate=" + rate +
-//                '}';
-//    }
+    public huoqi(Integer id, String card_number, Date create_time, Double money, Date last_time, Double rate) {
+        this.id = id;
+        this.card_number = card_number;
+        this.create_time = create_time;
+        this.money = money;
+        this.last_time = last_time;
+        this.rate = rate;
+    }
 
     @Override
     public String toString() {
@@ -88,8 +86,11 @@ public class huoqibiao {
                 ", create_time=" + create_time +
                 ", money=" + money +
                 ", last_time=" + last_time +
+                ", rate=" + rate +
                 '}';
     }
+
+
 
     public void setLast_time(Date last_time) {
         this.last_time = last_time;

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
-//@SpringBootTest
+@SpringBootTest
 class RuanjiangongchengApplicationTests {
     @Autowired
     private DataSource dataSource;

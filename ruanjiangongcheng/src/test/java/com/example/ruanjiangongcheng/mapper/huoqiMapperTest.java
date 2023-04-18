@@ -1,6 +1,7 @@
 package com.example.ruanjiangongcheng.mapper;
 
 import com.example.ruanjiangongcheng.entity.huoqibiao;
+import com.example.ruanjiangongcheng.entity.retuen.huoqi;
 import com.example.ruanjiangongcheng.service.IHuoqiService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +24,7 @@ public class huoqiMapperTest {
 
     @Test
     public void selectAllByCardNumber(){
-        List<huoqibiao> lst_huoqi=huoqiMapper1.selectAllByCardNumber("123");
+        List<huoqi> lst_huoqi=huoqiService.getAllHuoqi("123");
         for(int i=0;i<lst_huoqi.size();i++){
             System.out.println(lst_huoqi.get(i));
         }

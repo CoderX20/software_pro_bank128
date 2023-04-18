@@ -4,8 +4,8 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ruanjiangongcheng.mapper.dingqiMapper">
     <insert id="insertNewDingqi">
-        insert into  dingqi(card_number,create_time,money,period,rate)
-        values(#{card_number},#{create_time},#{money},#{period},#{rate})
+        insert into  dingqi(card_number,create_time,money,period)
+        values(#{card_number},#{create_time},#{money},#{period})
     </insert>
     <delete id="deleteDingqi">
         delete from dingqi where id=#{id}
