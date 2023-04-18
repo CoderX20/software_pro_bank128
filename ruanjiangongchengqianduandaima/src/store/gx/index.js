@@ -132,7 +132,8 @@ const mutations={
                 card_number:params[el].card_number,
                 money:params[el].money,
                 period:"",
-                deposit_class:""
+                deposit_class:"",
+                rate:params[el].rate
             })
         }
     },
@@ -144,7 +145,8 @@ const mutations={
                 card_number:params[el].card_number,
                 money:params[el].money,
                 period:params[el].period,
-                deposit_class:"定期"
+                deposit_class:"定期",
+                rate:params[el].rate
             })
         }
     }

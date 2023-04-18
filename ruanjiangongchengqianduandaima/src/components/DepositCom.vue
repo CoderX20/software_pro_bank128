@@ -13,6 +13,7 @@
                 <el-table-column label="存款金额" property="money" align="center" width="150px"></el-table-column>
                 <el-table-column label="存款时间" property="period" align="center" width="150px"></el-table-column>
                 <el-table-column label="存款类型" property="deposit_class" align="center" width="150px"></el-table-column>
+                  <el-table-column label="利率" property="rate" align="center" width="150px"></el-table-column>
                 </el-table>
             </div>
             <div class="entry-row">
@@ -50,8 +51,52 @@
             <div class="entry-row">
                 <input type="button" value="提交" class="but" @click="sub_new_deposit">
                 <input type="button" value="返回" class="but" @click="back">
+              <input type="button" value="打印该储蓄" class="but" @click="printOut" :disabled="this.selected_row===null?true:false">
             </div>
         </div>
+      <el-dialog title="活期账单" :visible.sync="dialogFormVisibleForHuoqi">
+       <div class="card_number">
+         <span class="label">账号：</span><span class="content">{{huoqi.card_number}}</span>
+       </div>
+        <div class="money">
+          <span class="label">余额：</span><span class="content">{{huoqi.money}}</span>
+        </div>
+        <div class="rate">
+          <span class="label">利率：</span><span class="content">{{huoqi.rate}}</span>
+        </div>
+        <div class="create_time">
+          <span class="label">创建时间：</span><span class="content">{{huoqi.create_time}}</span>
+        </div>
+        <div class="last_time">
+          <span class="label">最近一次操作时间：</span><span class="content">{{huoqi.last_time}}</span>
+        </div>
+
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogFormVisibleForHuoqi = false">确 定</el-button>
+        </div>
+      </el-dialog>
+      <el-dialog title="定期账单" :visible.sync="dialogFormVisibleForDingqi">
+        <div class="card_number">
+          <span class="label">账号：</span><span class="content">{{dingqi.card_number}}</span>
+        </div>
+        <div class="money">
+          <span class="label">余额：</span><span class="content">{{dingqi.money}}</span>
+        </div>
+        <div class="rate">
+          <span class="label">利率：</span><span class="content">{{dingqi.rate}}</span>
+        </div>
+        <div class="period">
+          <span class="label">存储时间：</span><span class="content">{{dingqi.period}}</span>
+        </div>
+        <div class="create_time">
+          <span class="label">创建时间：</span><span class="content">{{dingqi.create_time}}</span>
+        </div>
+
+
+        <div slot="footer" class="dialog-footer">
+          <el-button type="primary" @click="dialogFormVisibleForDingqi = false">确 定</el-button>
+        </div>
+      </el-dialog>
     </div>
 </template>
 
@@ -107,6 +152,9 @@ export default {
             money:0,
             restMoney:0,
             inputTipStr:"",
+          dialogFormVisible:false,
+          dialogFormVisibleForHuoqi:false,
+          dialogFormVisibleForDingqi:false,
         }
     },
     methods:{
@@ -117,9 +165,11 @@ export default {
           this.personal_data.map((item,index)=>{
             if(JSON.stringify(item)===JSON.stringify(row)){
               this.selectRowID=index
+
             }
           })
           // console.log(this.selectRowID)
+
             this.selected_row=row
             this.isNew=false
             this.isRegular=false
@@ -168,6 +218,7 @@ export default {
                 if(this.isRegular==true){
                     // 定期
                     this.$store.dispatch('sub_new_deposit_regular',{card_number:this.$store.state.gx.user_information.card_number,money:this.money,period:this.deposit_period})
+
                 }
                 else{
                     // 活期
@@ -175,6 +226,7 @@ export default {
                     this.$store.dispatch('sub_new_deposit_current',{cardNumber:this.$store.state.gx.user_information.card_number,money:this.money})
                 }
             }
+
             this.$store.state.gx.personal_deposit_data=[]
             this.isNew=false
             this.isRegular=false
@@ -188,7 +240,16 @@ export default {
             this.$store.dispatch('get_current_all', {card_number: this.userInfo.card_number})
             this.personal_data=[]
             this.personal_data = this.$store.state.gx.personal_deposit_data
-        }
+        },
+
+      async printOut(){
+
+          if(this.selected_row.period===""){
+            this.dialogFormVisibleForHuoqi=await this.$store.dispatch("getOneHuoqi",{id:this.selected_row.id})
+          }else{
+            this.dialogFormVisibleForDingqi=await this.$store.dispatch("getOneDingqi",{id:this.selected_row.id})
+          }
+      }
     },
     watch:{
         money(newValue,oldValue){
@@ -207,6 +268,12 @@ export default {
           state.gx.user_information=JSON.parse(sessionStorage.getItem("userInfo"))
         }
         return state.gx.user_information
+      },
+      dingqi:(state)=>{
+        return state.rt.dingqi
+      },
+      huoqi:(state)=>{
+        return state.rt.huoqi
       }
     })
   },
@@ -268,7 +335,7 @@ export default {
 }
 .el-table{
   flex: none;
-  width: 70%;
+  width: 80%;
   border-radius: 15px;
 }
 .selectStyle{

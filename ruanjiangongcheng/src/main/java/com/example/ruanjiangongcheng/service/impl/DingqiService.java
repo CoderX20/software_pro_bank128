@@ -58,43 +58,7 @@ public class DingqiService implements IDingqiService {
         dingqi dqq=new dingqi(dq.getId(),dq.getCard_number(),dq.getMoney(),dq.getPeriod(),r,dq.getCreate_time());
         return dqq;
     }
-//
-//    //根据传过来的信息创建新的定期储蓄
-//    @Override
-//    public int createNew(dingqibiao dq) {
-//        //获取到存款的时间，用于得到存款的利率
-//        String period = dq.getPeriod();
-//        //根据不同的存款时间来得到不同的利率
-//        switch (period){
-//            case "3个月":
-//                dq.setRate(0.0003f);
-//                break;
-//            case "6个月":
-//                dq.setRate(0.0006f);
-//                break;
-//            case "1年":
-//                dq.setRate(0.001f);
-//                break;
-//            case "3年":
-//                dq.setRate(0.003f);
-//                break;
-//            case "5年":
-//                dq.setRate(0.005f);
-//                break;
-//            default:
-//                dq.setRate(0f);
-//                break;
-//        }
-//        dq.setCreate_time(new Date());
-//        //向数据库中插入新的定期储蓄信息，返回值为1时，表示插入成功，为0时，表示插入失败
-//        int result = dingqimapper.insertNewDingqi(dq);
-//        if(result==0){
-//            throw new InsertException("定期存款失败");
-//
-//        }
-//        //返回结果
-//        return result;
-//    }
+
 
 
     //根据传过来的信息创建新的定期储蓄

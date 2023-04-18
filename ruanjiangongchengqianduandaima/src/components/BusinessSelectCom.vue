@@ -7,6 +7,7 @@
       <div class="but-row">
         <input type="button" value="存款" class="but" @click="deposit"><br>
         <input type="button" value="取款" class="but" @click="withdrawMoney">
+        <input type="button" value="修改利率" class="but" @click="changToRate">
       </div>
     </div>
   </div>
@@ -35,6 +36,9 @@ export default {
       }
       // console.log(this.$store.state.business)
 
+    },
+    changToRate(){
+      this.$router.push("/rate")
     }
   }
 }
@@ -54,32 +58,28 @@ export default {
     background-color: white;
     border-radius: 20px;
     h2{
-      margin: 30px 0 40px 0;
+      margin: 30px 0 20px 0;
+    }
+    .but-row{
+      position: relative;
+      width: 300px;
+      padding: 10px;
+      text-align: center;
+      input{
+        position: relative;
+        width: 250px;
+        height: 30px;
+        margin-top: 20px;
+      }
+
     }
   }
 }
 
-.but-row{
-  position: relative;
-  width: 300px;
-  left: 50%;
-  margin-left: -50%;
-  padding: 10px;
-  input{
-    margin-top: 20px;
-  }
-}
+
 #business-title{
   text-align: center;
   font-size: 16px;
 }
-.but{
-  position: relative;
-  width: 250px;
-  height: 30px;
-  left: 50%;
-  margin-left: -125px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
+
 </style>

@@ -1,7 +1,7 @@
 package com.example.ruanjiangongcheng.controller;
 
+import com.example.ruanjiangongcheng.entity.huoqibiao;
 import com.example.ruanjiangongcheng.entity.rate;
-import com.example.ruanjiangongcheng.entity.retuen.huoqi;
 import com.example.ruanjiangongcheng.mapper.rateMapper;
 import com.example.ruanjiangongcheng.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -25,14 +25,16 @@ public class RateController extends BaseController{
         List<rate> lst_rate = rt.selectAllRate();
         return new JsonResult<>(Ok,lst_rate);
     }
-    @PostMapping("updateRate")
+    @PostMapping("update")
     @ApiOperation("修改利率")
-    public JsonResult<String> updateRate(rate rate){
-        int result = rt.updateRate(rate);
+    public JsonResult<String> updateRate(rate rat){
+
+        int result = rt.updateRate(rat);
         if(result!=1){
-            return new JsonResult<>(Ok,"更新失败");
+            return new JsonResult<>(5010,"更新失败");
         }else{
             return new JsonResult<>(Ok,"更新成功");
         }
     }
+
 }

@@ -9,4 +9,6 @@ module.exports = defineConfig({
       //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
     }
   }
+
+
 })

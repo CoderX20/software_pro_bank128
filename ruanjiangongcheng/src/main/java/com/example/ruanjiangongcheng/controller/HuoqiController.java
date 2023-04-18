@@ -1,7 +1,9 @@
 package com.example.ruanjiangongcheng.controller;
 
 import com.example.ruanjiangongcheng.entity.huoqibiao;
+import com.example.ruanjiangongcheng.entity.rate;
 import com.example.ruanjiangongcheng.entity.retuen.huoqi;
+import com.example.ruanjiangongcheng.mapper.rateMapper;
 import com.example.ruanjiangongcheng.service.IHuoqiService;
 import com.example.ruanjiangongcheng.utils.JsonResult;
 import io.swagger.annotations.Api;
@@ -18,6 +20,7 @@ import java.util.List;
 public class HuoqiController extends BaseController{
     @Autowired
     private IHuoqiService huoqiService;
+
 
     @GetMapping("getAll")
     @ApiOperation("获取到账户下所有的活期")
@@ -66,5 +69,6 @@ public class HuoqiController extends BaseController{
         return new JsonResult<>(Ok);
 
     }
+
 
 }
