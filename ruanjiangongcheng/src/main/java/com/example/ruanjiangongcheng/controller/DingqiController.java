@@ -25,7 +25,6 @@ public class DingqiController extends BaseController{
 
     public JsonResult<List<dingqi>> getAll(String card_number){
         List<dingqi> lst_dingqi = dingqiService.getAll(card_number);
-        System.out.println(lst_dingqi.get(0));
         return new JsonResult<>(Ok,lst_dingqi);
     }
     @GetMapping("getOne")
