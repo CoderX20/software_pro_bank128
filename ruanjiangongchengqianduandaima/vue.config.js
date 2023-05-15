@@ -7,7 +7,14 @@ module.exports = defineConfig({
     historyApiFallback: {
       index: '/index.html'
       //与output的publicPath有关(HTMLplugin生成的html默认为index.html)
-    }
+    },
+    // proxy: {
+    //         '/api': {
+    //           target: 'http://localhost:8088',    // 你自己的api接口地址
+    //           changeOrigin: true,
+    //           pathRewrite: {'^/api': ''}
+    //         }
+    //       }
   }
 
 
